@@ -16,3 +16,46 @@ private static boolean hasExternalStoragePermission(Context context) {
         return perm == 0;
     }
 ```
+
+### 将字符串编码成16进制字符串（适用于所有包括中文），并反编码
+
+```java
+public String toHexString(String str) {
+        //根据默认编码获取字节数组
+        byte[] bytes = null;
+        try {
+            bytes = str.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if (bytes == null) return null;
+        StringBuilder sb = new StringBuilder(bytes.length * 2);
+        //将字节数组中每个字节拆解成2位16进制整数
+        for (int i = 0; i < bytes.length; i++) {
+            sb.append(hexString.charAt((bytes[i] & 0xf0) >> 4));
+            sb.append(hexString.charAt(bytes[i] & 0x0f));
+        }
+        return sb.toString();
+    }
+
+public static String hexToString(String s) {
+        if ("0x".equals(s.substring(0, 2))) {
+            s = s.substring(2);
+        }
+        byte[] baKeyword = new byte[s.length() / 2];
+        try {
+            for (int i = 0; i < baKeyword.length; i++) {
+                baKeyword[i] = (byte) (Integer.parseInt(s.substring(i * 2, i * 2 + 2), 16));
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        try {
+            s = new String(baKeyword, "utf-8");//UTF-16le:Not
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+```
+
