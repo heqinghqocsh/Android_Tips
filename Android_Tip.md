@@ -1,6 +1,6 @@
 # Android小提示
 
-## 安装apk
+### 安装apk
 
 ```java
 Intent i = new Intent(Intent.ACTION_VIEW);
@@ -8,7 +8,7 @@ Intent i = new Intent(Intent.ACTION_VIEW);
         mContext.startActivity(i);
 ```
 
-## 验证引用是否有某项权限
+### 验证引用是否有某项权限
 
 ```java
 private static boolean hasExternalStoragePermission(Context context) {
