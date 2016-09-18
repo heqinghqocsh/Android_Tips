@@ -59,3 +59,11 @@ public static String hexToString(String s) {
     }
 ```
 
+### 加载assets下的HTML文件
+
+```java
+webView.loadUrl("file:///android_asset/about.html");
+```
+
+
+
