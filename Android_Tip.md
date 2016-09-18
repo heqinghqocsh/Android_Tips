@@ -65,5 +65,39 @@ public static String hexToString(String s) {
 webView.loadUrl("file:///android_asset/about.html");
 ```
 
+### Java与JavaScript互相调用
+
+#### Java端代码
+
+```java
+//如果访问的页面中有Javascript，则WebView必须设置支持Javascript
+mWebView.getSettings().setJavaScriptEnabled(true);
+mWebView.addJavascriptInterface(new JavascriptInterface(), "demo");
+mWebView.loadUrl("file:///android_asset/xxx.html");
+//调用JavaScript方法
+mWebView.loadUrl("javascript:xxxMethod()");
+mWebView.loadUrl("javascript:bindData(' " + jsonStr + " ')");
+
+//JavascriptInterface
+final class JavascriptInterface {
+        @android.webkit.JavascriptInterface
+        public void print(String html) {
+            //....
+        }
+    }
+```
+
+#### JavaScript端代码
+
+```javascript
+function bindData(json) {
+	    $.each($.parseJSON(json),function(i,item){
+	        //....
+	    });
+	}
+//JavaScript端调用Java中的方法
+window.demo.print(str);
+```
+
 
 
