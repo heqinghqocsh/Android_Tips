@@ -99,5 +99,13 @@ function bindData(json) {
 window.demo.print(str);
 ```
 
+### 判断是否在主线程中
+
+```java
+public static boolean isOnMainThread() {
+        return Looper.myLooper() == Looper.getMainLooper();
+    }
+```
+
 
 
